@@ -22,7 +22,7 @@ bool validBracket(const string& in) {
 
 		if (check < 0) return false;	// 올바른 괄호 문자열 조건을 만족 하려면 '(' 부터 시작이므로 -가 나올수 없음
 	}
-	return true;
+	return (check == 0);
 }
 
 string conversionBracket(const string& in) {
@@ -34,33 +34,22 @@ string conversionBracket(const string& in) {
 	return result;
 }
 
-void conversionString(string& out, const string& in) {
-    string u, v;
-    const int len = in.length();   
+string conversionString(const string& in) {
+    if (in.empty()) return in;
+    if (validBracket(in)) return in;
+    
     const int split = splitCount(in);
-    u = in.substr(0, split);
-    if (split < len) v = in.substr(split, len-split);
+    string u = in.substr(0, split);
+    string v = in.substr(split);
 
-	if (validBracket(u)) out += u;
-	else {
-		out += '(';
-		if (!v.empty()) {
-			conversionString(out, v);
-			v.clear();
-		}
-		out += ')';
-		out += conversionBracket(u);
-	}
-	if (!v.empty()) {
-		conversionString(out, v);
-	}
+	if (validBracket(u)) return (u + conversionString(v));
+	else return '(' + conversionString(v) + ')' + conversionBracket(u);
 }
 
 string solution(string p) {
     string answer = "";
-    
-    if (p.empty()) return answer;
-	conversionString(answer, p);
+        
+	answer = conversionString(p);
     
     return answer;
 }
