@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <regex>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ void initDicNumber() {
 }
 
 int makeDigit(const string& in) {
+	initDicNumber();
 	string result = "";
 	string tmp = "";
 	for (int i = 0; i < in.length(); ++i) {
@@ -36,7 +38,20 @@ int makeDigit(const string& in) {
 }
 
 int solution(string s) {  
-	initDicNumber();
-	int answer = makeDigit(s);
+	int answer = 0;
+    // answer = makeDigit(s);
+    
+    s = regex_replace(s, regex("zero"), "0");
+	s = regex_replace(s, regex("one"), "1");
+	s = regex_replace(s, regex("two"), "2");
+	s = regex_replace(s, regex("three"), "3");
+	s = regex_replace(s, regex("four"), "4");
+	s = regex_replace(s, regex("five"), "5");
+	s = regex_replace(s, regex("six"), "6");
+	s = regex_replace(s, regex("seven"), "7");
+	s = regex_replace(s, regex("eight"), "8");
+	s = regex_replace(s, regex("nine"), "9");
+    answer = stoi(s);
+    
     return answer;
 }
