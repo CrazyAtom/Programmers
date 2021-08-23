@@ -4,7 +4,7 @@
 
 using namespace std;
 
-string comp(const string& in, const int& comp) {
+string compression(const string& in, const int& comp) {
     const int len = in.length();
     string result = "";
     string pattern = "";
@@ -40,7 +40,7 @@ int solution(string s) {
     
     int answer = 1000;
 	for (int word = 1; word <= len/2; ++word) {
-        string comp_s = comp(s, word);
+        string comp_s = compression(s, word);
 		answer = (comp_s.length() < answer) ? comp_s.length() : answer;
 	}
 
